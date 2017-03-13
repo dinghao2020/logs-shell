@@ -78,7 +78,8 @@ install_filebeat(){
 }
 
 install_nagios(){
-	yum install -y gcc nrpe ntpdate
+	yum update -y
+	yum install -y gcc nrpe ntpdate lrzsz rsync
 	wget -c -O /tmp/nagios-plugins-2.1.4.tar.gz  http://downfiles.cimhealth.com/nagios-plugins-2.1.4.tar.gz
 	tar -xf /tmp/nagios-plugins-2.1.4.tar.gz -C /usr/local/
 	{ test -d /usr/local/nagios-plugins-2.1.4 && cd /usr/local/nagios-plugins-2.1.4 ;} || return 0
