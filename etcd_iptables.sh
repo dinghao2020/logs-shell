@@ -28,6 +28,7 @@ function do_iptable(){
     for i in $server_ip;do
         /sbin/iptables -I INPUT -p TCP -m multiport --destination-port $server_port -s $i -j ACCEPT
     done   
+    /sbin/iptables -I INPUT -p TCP --destination-port 8731 -s 211.144.0.242 -j ACCEPT
     /sbin/iptables -A INPUT -p tcp -m state --state ESTABLISHED,RELATED -j ACCEPT
     /sbin/iptables -A INPUT -p tcp -m multiport --destination-port $server_port -s 0.0.0.0/0 -j DROP
 }
