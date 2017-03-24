@@ -1,0 +1,7 @@
+#!/usr/bin/expect -f
+set pass ansible
+spawn ssh-copy-id -o StrictHostKeyChecking=no -i /home/dh/.ssh/id_rsa.pub dh@192.168.1.73
+expect "*?assword:*"
+send -- "$pass\r"
+send -- "\r"
+interact

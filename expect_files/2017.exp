@@ -1,0 +1,11 @@
+#!/usr/bin/expect -f
+set pass ansible
+set server [lrange $argv 0 0]
+#set cmds "cat "
+
+spawn ssh -o StrictHostKeyChecking=no root@192.168.1.131  "/bin/bash"　< 2017.sh
+match_max 100000
+expect "*?assword:*"
+send -- "$pass\r"
+send -- "\r"
+interact

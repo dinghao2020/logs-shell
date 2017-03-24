@@ -1,0 +1,10 @@
+#!/usr/bin/expect -f
+set pass ansible
+set server [lrange $argv 0 0]
+#set cmds "cat "
+spawn scp -o StrictHostKeyChecking=no  /home/dh/test/add_user.sh root@$server:/root/dh1/ 
+match_max 100000
+expect "*?assword:*"
+send -- "$pass\r"
+send -- "\r"
+interact

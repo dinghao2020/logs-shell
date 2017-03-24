@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+# sudo apt-get install expect
+# ./ssh.exp user passwd server
+set user [lrange $argv 0 0]
+set pass [lrange $argv 1 1]
+set server [lrange $argv 2 2]
+set cmds [lrange $argv 3 $argc]
+
+spawn ssh -o StrictHostKeyChecking=no $user@$server $cmds
+match_max 100000
+expect "*?assword:*"
+send -- "$pass\r"
+send -- "\r"
+interact

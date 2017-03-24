@@ -1,0 +1,15 @@
+#!/usr/bin/expect -f
+set pass cim2wsx#12Ka$
+set server [lrange $argv 0 0]
+#set cmds "cat "
+spawn scp -P8015 -o StrictHostKeyChecking=no  /home/dh/test/jdk-8u45-linux-x64.tar.gz  root@$server:/root/
+match_max 100000
+expect "*?assword:*"
+send -- "$pass\r"
+send -- "\r"
+spawn ssh -p8015 -o StrictHostKeyChecking=no root@$server "chmod +x /root/init_jdk.sh && bash /root/init_jdk.sh"
+match_max 100000
+expect "*?assword:*"
+send -- "$pass\r"
+send -- "\r"
+interact

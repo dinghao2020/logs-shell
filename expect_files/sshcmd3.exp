@@ -1,0 +1,15 @@
+#!/usr/bin/expect -f
+set pass 111111
+
+
+array=(192.168.1.66 192.168.1.133)
+for i in ${array[@]};do {
+spawn ssh -o StrictHostKeyChecking=no root@"$i" "ls -l"
+match_max 100000
+expect "*?assword:*"
+send -- "$pass\r"
+send -- "\r"
+interact
+;}
+done
+
